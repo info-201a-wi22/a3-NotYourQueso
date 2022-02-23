@@ -1,0 +1,83 @@
+---
+title: "Incarceration: Starting from Scratch"
+author: "Elora Hoberecht"
+date: "02/22/2022"
+output: html_document
+---
+
+## Introduction
+
+As you introduce your report and the dataset, you should describe the variables that you've chosen to analyze. In doing so, make clear which measure(s) of incarceration you are focusing on. 
+
+
+## Summary Information
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../source/analysis.R")
+source("../source/incarceration_over_time.R")
+source("../source/incarceration_compare_variables.R")
+source("../source/incarceration_map.R")
+```
+
+Then, you will share at least 5 relevant values of interest. These will likely be calculated using your DPLYR skills, answering questions such as: 
+
+- What is the average value of my variable across all the counties (in the current year)?
+- Where is my variable the highest / lowest?
+- How much has my variable change over the last N years?
+
+Feel free to calculate and report values that you find relevant. Again, remember that the purpose is to think about how these measure of incarceration vary by race. 
+
+
+```{r summary}
+summary_info
+```
+
+The following is a table grouped by gaming platforms and arranged in a descending order of the total player count. All numeric values are rounded to 2 decimal places. Noticiblely, players PC platform are the majority and spend the most time. Superisingly, it seems like they are also the group with the least mental health issues.
+
+```{r table}
+agg_table
+```
+
+The first chart that you'll create and include will show the trend over time of your variable/topic. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+
+- Show more than one, but fewer than ~10 lines: your graph should compare the trend of your measure over time. This may mean showing the same measure for different locations, or different racial groups. Think carefully about a meaningful comparison of locations (e.g., the top 10 counties in a state, top 10 states, etc.)
+- You must have clear x and y axis labels,
+- The chart needs a clear title 
+- You need a legend for your different line colors, and a clear legend title
+- In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
+
+When I say "clear" or "human readable" titles and labels, that means that you should not just display the variable name. 
+
+
+```{r incarceration_over_time, echo=FALSE}
+longer_data
+```
+
+The second chart that you'll create and include will show how two different (continuous) variables are related to one another. Again, think carefully about what such a comparison means, and want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+
+- You must have clear x and y axis labels,
+- The chart needs a clear title 
+- If you choose to add a color encoding (not required), you need a legend for your different color and a clear legend title
+
+In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
+
+
+```{r incarceration_compare_variables, echo=FALSE}
+GAD_scatterplot
+```
+
+
+The last chart that you'll create and include will show how a variable is distributed geographically. Again, think carefully about what such a comparison means, and want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+
+- Your map needs a title
+- Your color scale needs a legend with a clear label
+- Use a map based coordinate system to set the aspect ratio of your map (see reading)
+- Use a minimalist theme for the map (see reading)
+
+In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
+
+
+```{r incarceration_map, echo=FALSE}
+pie_chart
+```
