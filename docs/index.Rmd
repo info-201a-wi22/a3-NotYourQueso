@@ -1,5 +1,5 @@
 ---
-title: "Incarceration: Starting from Scratch"
+title: "Racial Disparities in Texas' Justice System"
 author: "Elora Hoberecht"
 date: "02/22/2022"
 output: html_document
@@ -7,7 +7,7 @@ output: html_document
 
 ## Introduction
 
-As you introduce your report and the dataset, you should describe the variables that you've chosen to analyze. In doing so, make clear which measure(s) of incarceration you are focusing on. 
+The United States criminal justice system is inherently race-based, targeting minorities since its inception following the emancipation of slaves by the 13th amendment. This historic amendment includes a clause excluding convicts and thus inspiring inventive laws and policies directly targeting non-white minorities, such those against vagrancy, loitering, and the many policies put into motion during the 'War on Drugs' movement. The southern US is known for its more conservative ideals and long, storied history with slavery and racism, so for this assignment it seems relevant to focus on Texas: the heart of the south and birthplace of the Juneteenth holiday marking the end of slavery.
 
 
 ## Summary Information
@@ -15,69 +15,42 @@ As you introduce your report and the dataset, you should describe the variables 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source("../source/analysis.R")
-source("../source/incarceration_over_time.R")
-source("../source/incarceration_compare_variables.R")
-source("../source/incarceration_map.R")
 ```
 
-Then, you will share at least 5 relevant values of interest. These will likely be calculated using your DPLYR skills, answering questions such as: 
+The dataset used here is based on data collected by the Bureau of Labor Statistics. The department relies primarily on data provided by each county in the United States. According to this dataset, the `r max_region_2016`ern US holds the majority of the country's prisoners, as of 2016. In this same year, `r max_state_2016` ranked at the top as the state with the highest population of prisoners, with a total of `r max_pop_2016` people either in prison or jail. Of the counties in Texas, `r max_county_2016` houses the greatest population of inmates at r max_county_count_2016`prisoners. These findings are not particularly surprising, considering the Southern US' adoption of 'tough-on-crime' laws and overwhelming commitment to the criminal justice system over the years. 
 
-- What is the average value of my variable across all the counties (in the current year)?
-- Where is my variable the highest / lowest?
-- How much has my variable change over the last N years?
-
-Feel free to calculate and report values that you find relevant. Again, remember that the purpose is to think about how these measure of incarceration vary by race. 
+Despite the grim picture this data paints about Texas' justice system, the overall population of jailed or imprisoned Texans has actually decreased by `r diff_2016_2006`% between 2006 and 2016, indicating an improving overall trend. Because of this data, I decided to focus the rest of this project on Texas specifically, to better understand the impacted populations and identify any significant patterns that might exist in this data set. 
 
 
-```{r summary}
-summary_info
+## Chart 1: Trends Over Time
+
+This chart is intended to show the different racial groups that make up the population of jailed or imprisoned Texas residents, comparing changes over a ten year period. I chose this specific range (2006 - 2016) because these years contain the most complete data for these racial groups in a large enough time frame to properly illustrate change over time.
+  
+Some interesting (and unexpected) patterns emerged from this graph. While there is clearly an over-representation of Black and Latinx in the prison system, it does appear that this gap has been steadily narrowing. Additionally, I had to modify this graph to exclude AAPI and Native American demographic information, as very little data had been collected from each country, thus making it very difficult to observe patterns and gain insights from these values. This suggests a major flaw in the way counties collect and/or report demographic information, calling into question the validity of all data in this dataset. 
+
+
+```{r trends_over_time, echo=FALSE}
+trends_over_time
 ```
 
-The following is a table grouped by gaming platforms and arranged in a descending order of the total player count. All numeric values are rounded to 2 decimal places. Noticiblely, players PC platform are the majority and spend the most time. Superisingly, it seems like they are also the group with the least mental health issues.
+## Chart 2: Comparing Variables
 
-```{r table}
-agg_table
+This bar graph takes a look at prison admission rates in Texas, broken down by race and county. I included this chart because it felt important to observe patterns pertaining to new admissions using the most recent data available. This data was filtered to show values from the 5 Texas counties with the highest admission rates for 2016. 
+
+It became apparent very quickly that while the overall Black and Latinx incarceration rates are on a downtrend, the admission rate data emphasizes that these communities are still over-represented in the prison system. The admission rate for Black prisoners is at least 2x the rate for White prisoners in every country measured. The Latinx admission rate also eclipses the rate for White admits in 2/5 counties. These findings underscore a major gap in the justice system that needs urgent attention to truly begin dismantling the oppressive governing structures impacting this country. 
+
+
+```{r chart2_plot, echo=FALSE}
+chart2_plot
 ```
 
-The first chart that you'll create and include will show the trend over time of your variable/topic. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+## Chart 3: Mapping Data
 
-- Show more than one, but fewer than ~10 lines: your graph should compare the trend of your measure over time. This may mean showing the same measure for different locations, or different racial groups. Think carefully about a meaningful comparison of locations (e.g., the top 10 counties in a state, top 10 states, etc.)
-- You must have clear x and y axis labels,
-- The chart needs a clear title 
-- You need a legend for your different line colors, and a clear legend title
-- In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
+This map provides a visual representation showing the distribution of prisoners jailed in Texas that identify as part of the Latinx community. I felt this was important to see if any geographic patterns emerge, potentially bringing new insights and conclusions from this data.
 
-When I say "clear" or "human readable" titles and labels, that means that you should not just display the variable name. 
+Unfortunately, I didn't see any obvious patterns. I happen to know from living in Texas that most of these counties with the greatest population of Latinx prisoners also have a very large Latinx community in the broader population. It may be more effective to look at proportions, comparing the proportion of Latinx prisoners in each county, instead of simply looking at total population by race individually. 
 
 
-```{r incarceration_over_time, echo=FALSE}
-longer_data
-```
-
-The second chart that you'll create and include will show how two different (continuous) variables are related to one another. Again, think carefully about what such a comparison means, and want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- You must have clear x and y axis labels,
-- The chart needs a clear title 
-- If you choose to add a color encoding (not required), you need a legend for your different color and a clear legend title
-
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-
-```{r incarceration_compare_variables, echo=FALSE}
-GAD_scatterplot
-```
-
-
-The last chart that you'll create and include will show how a variable is distributed geographically. Again, think carefully about what such a comparison means, and want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Your map needs a title
-- Your color scale needs a legend with a clear label
-- Use a map based coordinate system to set the aspect ratio of your map (see reading)
-- Use a minimalist theme for the map (see reading)
-
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-
-```{r incarceration_map, echo=FALSE}
-pie_chart
+```{r chart3_map, echo=FALSE}
+chart3_map
 ```
